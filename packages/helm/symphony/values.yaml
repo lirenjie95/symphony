@@ -1,0 +1,34 @@
+fullnameOverride: symphony
+symphonyImage:
+  repository: ghcr.io/eclipse-symphony/symphony-k8s
+  pullPolicy: IfNotPresent
+  tag: "{VERSION}"
+paiImage:
+  repository: ghcr.io/eclipse-symphony/symphony-api
+  pullPolicy: IfNotPresent
+  tag: "{VERSION}"
+CUSTOM_VISION_KEY: "AAAA"
+installServiceExt: true
+global:
+  azure:
+    identity:
+      enabled: false
+observability:
+  tracing:
+    exporter:
+      zipkin: true
+zipkin:
+  fullnameOverride: symphony-zipkin
+cert-manager:
+  fullnameOverride: symphony-cert-manager
+flavor: oss
+redis:
+  enabled: true
+  image: redis/redis-stack-server:latest
+  port: 6379
+parent:
+  url: 
+  username: admin
+  password:
+siteId: hq
+imagePrivateRegistryUrl: ghcr.io

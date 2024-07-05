@@ -1,0 +1,12 @@
+##
+## Copyright (c) Microsoft Corporation.
+## Licensed under the MIT license.
+## SPDX-License-Identifier: MIT
+##
+version: "3.4"
+services:
+  manager:
+    image: ghcr.io/eclipse-symphony/symphony-k8s
+    build:
+      context: ../
+      dockerfile: k8s/Dockerfile

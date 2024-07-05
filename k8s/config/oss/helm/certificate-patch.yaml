@@ -1,0 +1,12 @@
+##
+## Copyright (c) Microsoft Corporation.
+## Licensed under the MIT license.
+## SPDX-License-Identifier: MIT
+##
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: serving-cert  
+  namespace: system
+spec:
+  secretName: '{{ include "symphony.fullname" . }}-webhook-server-cert'

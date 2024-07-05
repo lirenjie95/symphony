@@ -1,0 +1,28 @@
+##
+## Copyright (c) Microsoft Corporation.
+## Licensed under the MIT license.
+## SPDX-License-Identifier: MIT
+##
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: symphony-api
+  labels:
+    app: symphony-api
+  namespace: symphony-k8s-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: symphony-api
+  template:
+    metadata:
+      labels:
+        app: symphony-api
+    spec:
+      containers:
+      - name: symphony-api
+        image: ghcr.io/eclipse-symphony/symphony-api:0.47.1
+        ports:
+        - containerPort: 8080        
+      serviceAccountName: pai-sp

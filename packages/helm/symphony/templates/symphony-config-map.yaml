@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "symphony.configmapName" . }}
+  namespace: {{ .Release.Namespace }}
+data:
+  symphony-api.json: |-    
+    {{ tpl (.Files.Get "files/symphony-api.json") . | nindent 4 }}

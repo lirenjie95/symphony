@@ -1,0 +1,10 @@
+##
+## Copyright (c) Microsoft Corporation.
+## Licensed under the MIT license.
+## SPDX-License-Identifier: MIT
+##
+symphonyImage:
+  pullPolicy: Never
+paiImage:
+  pullPolicy: Never
+installServiceExt: false
