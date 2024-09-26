@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenhouse Management Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .dashboard-container {
+            margin: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.02);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            font-size: 1.2em;
+        }
+        .card-body {
+            background-color: #ffffff;
+        }
+        .btn-custom {
+            border-radius: 20px;
+            padding: 10px 20px;
+            margin: 5px;
+        }
+        .icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        .user-role {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container dashboard-container">
+        <div class="user-role">
+            <i class="fas fa-user icon"></i>Admin
+        </div>
+        <h1 class="text-center mb-4">Greenhouse Management Dashboard</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-thermometer-half icon"></i>Temperature
+                    </div>
+                    <a href="/temperature/">
+                        <div class="card-body">
+                            <h5 class="card-title">Current Temperature: <span id="temperature">25°C</span></h5>
+                            <div id="temperature-chart">
+                                <div class="card-body">
+                                    <div id="dash-container-1">
+                                        <!-- Dash app will be rendered here -->
+                                        <iframe src="/temperature-small/" style="width:100%; height:200px; border:none;"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-tint icon"></i>Humidity
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Current Humidity: <span id="humidity">60%</span></h5>
+                        <div id="humidity-chart">
+                            <div class="card-body">
+                                <div id="dash-container-2">
+                                    <!-- Dash app will be rendered here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-water icon"></i>Soil Moisture
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Current Soil Moisture: <span id="soil-moisture">40%</span></h5>
+                        <div id="soil-moisture-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-sun icon"></i>Light Intensity
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Current Light Intensity: <span id="light-intensity">300 lux</span></h5>
+                        <div id="light-intensity-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-cloud-rain icon"></i>Irrigation Control
+                    </div>
+                    <div class="card-body text-center">
+                        <button class="btn btn-primary btn-custom" onclick="startIrrigation()"><i class="fas fa-play"></i> Start Irrigation</button>
+                        <button class="btn btn-danger btn-custom" onclick="stopIrrigation()"><i class="fas fa-stop"></i> Stop Irrigation</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-wind icon"></i>Ventilation Control
+                    </div>
+                    <div class="card-body text-center">
+                        <button class="btn btn-primary btn-custom" onclick="startVentilation()"><i class="fas fa-play"></i> Start Ventilation</button>
+                        <button class="btn btn-danger btn-custom" onclick="stopVentilation()"><i class="fas fa-stop"></i> Stop Ventilation</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function startIrrigation() {
+            alert('Irrigation started');
+        }
+
+        function stopIrrigation() {
+            alert('Irrigation stopped');
+        }
+
+        function startVentilation() {
+            alert('Ventilation started');
+        }
+
+        function stopVentilation() {
+            alert('Ventilation stopped');
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+</html>
