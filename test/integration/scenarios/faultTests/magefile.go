@@ -17,7 +17,7 @@ import (
 	"github.com/princjef/mageutil/shellcmd"
 )
 
-// Entry point for running the tests
+// Entry point for running the fault tests
 func FaultTests() error {
 	fmt.Println("Running fault injection tests")
 
@@ -27,6 +27,17 @@ func FaultTests() error {
 		if err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+// Entry point for running the delay injection tests
+func DelayTests() error {
+	fmt.Println("Running delay injection tests")
+
+	// Run delay injection tests
+	for _, test := range utils.Faults {
+		InjectDelayTestHelper(test)
 	}
 	return nil
 }
@@ -55,6 +66,34 @@ func FaultTestHelper(test utils.FaultTestCase) error {
 
 	err = Verify(test.TestCase)
 	return err
+}
+
+func InjectDelayTestHelper(test utils.FaultTestCase) {
+	testName := fmt.Sprintf("%s/%s/%s", test.TestCase, test.Fault, test.FaultType)
+	fmt.Println("Running ", testName)
+
+	// Step 2.1: setup cluster
+	defer testhelpers.Cleanup(testName)
+	err := testhelpers.SetupCluster()
+	if err != nil {
+		return
+	}
+	// Step 2.2: enable port forward on specific pod
+	stopChan := make(chan struct{}, 1)
+	defer close(stopChan)
+	err = testhelpers.EnablePortForward(test.PodLabel, utils.LocalPortForward, stopChan)
+	if err != nil {
+		return
+	}
+
+	InjectCommand := fmt.Sprintf("curl localhost:%s/%s -XPUT -d'%s'", utils.LocalPortForward, test.Fault, test.FaultType)
+	os.Setenv(utils.InjectFaultEnvKey, InjectCommand)
+	os.Setenv(utils.PodEnvKey, test.PodLabel)
+
+	err = Verify(test.TestCase)
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
 }
 
 func Verify(test string) error {

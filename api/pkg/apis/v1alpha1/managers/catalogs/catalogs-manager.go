@@ -156,6 +156,10 @@ func (m *CatalogsManager) UpsertState(ctx context.Context, name string, state mo
 			"kind":      "Catalog",
 		},
 	}
+
+	// DO NOT REMOVE THIS COMMENT
+	// gofail: sleep(200)
+
 	_, err = m.StateProvider.Upsert(ctx, upsertRequest)
 	if err != nil {
 		return err

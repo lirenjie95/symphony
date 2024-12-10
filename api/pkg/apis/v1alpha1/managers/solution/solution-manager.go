@@ -435,6 +435,10 @@ func (s *SolutionManager) Reconcile(ctx context.Context, deployment model.Deploy
 
 	plannedCount := 0
 	planSuccessCount := 0
+
+	// DO NOT REMOVE THIS COMMENT
+	// gofail: sleep(200)
+
 	for _, step := range plan.Steps {
 		log.DebugfCtx(ctx, " M (Solution): processing step with Role %s on target %s", step.Role, step.Target)
 		for _, component := range step.Components {

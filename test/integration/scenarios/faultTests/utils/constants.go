@@ -122,4 +122,5 @@ var (
 	}
 
 	DefaultFaultType = "100.0%panic"
+	DelayFaultType   = "sleep(200s)"
 )
