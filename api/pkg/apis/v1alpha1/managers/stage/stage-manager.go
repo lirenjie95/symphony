@@ -614,6 +614,8 @@ func (s *StageManager) HandleTriggerEvent(ctx context.Context, campaign model.Ca
 				} else {
 					var outputs map[string]interface{}
 					var pause bool
+					// DO NOT REMOVE THIS COMMENT
+					// gofail: sleep(200)
 					outputs, pause, err = provider.(stage.IStageProvider).Process(ctx, *s.Manager.Context, inputCopy)
 
 					if pause {
